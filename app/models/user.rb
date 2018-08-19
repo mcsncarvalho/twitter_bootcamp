@@ -28,4 +28,11 @@ class User < ApplicationRecord
     following.delete(other_user)
   end
 
+  def feed
+    # Este método irá gerar o feed para o usuário
+    users_id = following.pluck(:id)
+    users_id << self.id
+    Tweet.where(user_id: users_id).order(created_at: :desc)
+  end
+
 end

@@ -1,21 +1,23 @@
 class RelationshipsController < ApplicationController
     def create
-        other_user = User.find(params["id"])
-        if current_user.following?(other_user)
-            redirect_to user_path(id:params["id"]), alert: "Já está seguindo #{other_user.email}!"
+        @user = User.find(params["id"])
+
+        if @user.id == current_user.id
+            redirect_to user_path(id:params["id"]), alert: "Não pode seguir você mesmo!"
             return false
         end
 
-        if current_user.follow!other_user
+        if current_user.following?(@user)
+            redirect_to user_path(id:params["id"]), alert: "Já está seguindo #{@user.email}!"
+        else 
+            current_user.follow!@user
             redirect_to user_path(id:params["id"]), notice: 'Seguindo!'
-        else
-            redirect_to user_path(id:params["id"]), alert: 'Não foi possivel seguir!'
         end
     end
 
     def destroy
-        other_user = User.find(params["id"])
-        current_user.unfollow!(other_user)
+        @user = User.find(params["id"])
+        current_user.unfollow!(@user)
         redirect_to user_path(id:params["id"]), notice: 'Parou de seguir!'
     end
 end

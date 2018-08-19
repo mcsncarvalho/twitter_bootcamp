@@ -10,9 +10,18 @@
 
   <body>
     <header>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <div class="notificacoes">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+      <%= link_to "Meu Perfil", root_path %>
+      <%= link_to "Usuários", users_path %>
     </header>
-    <%= yield %>
+    <section>
+      <%= yield %>
+    </section>
+    <footer>
+      <p>Feito no bootcamp</p>
+    </footer>
   </body>
 </html>

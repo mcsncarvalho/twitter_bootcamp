@@ -4,10 +4,6 @@
     Olá, <%= current_user.email %>,
     <br>
     <h2>Lista de Tweets</h2>
-
-    <%= current_user.active_relationships.each do |r| %>
-        <%= r %>
-    <% end %>
     
     <%= form_for @tweet do |f| %>
         <%= f.text_field :content %>

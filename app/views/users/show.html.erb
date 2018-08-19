@@ -2,6 +2,12 @@
 
 <h2>Tweets (<%= @user.tweets.count %>)</h2>
 
+<%# current_user.active_relationships.find() %>
+
+
+
+<%= link_to "Follow", relationships_path(id:@user.id), method: "post" %>
+
 <% if @user.tweets.empty? %>
     <p>Usuário ainda não tem tweets.</p>
 <% else %>
